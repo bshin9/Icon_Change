@@ -1,0 +1,82 @@
+const array = [
+  {
+    firstName: 'Freddy',
+    lastName: 'Bes',
+    phoneNumber: '555-333-2222'
+    
+  },
+  {
+    firstName: 'Ned',
+    lastName: 'Garfield',
+    phoneNumber: '222-111-2222'
+  },
+];
+
+class Call extends React.Component {
+  render () {
+  return (
+    <div>
+    <p>You need to Contact {this.props.firstName} {this.props.lastName} at {this.props.phoneNumber}</p> <Button content="Pending" variant="green" />
+    </div>
+  );
+ }
+}
+
+function Contact (props) {
+  return (
+    <div>
+      {props.contactList.map(array =>
+        <Call 
+          firstName={array.firstName}
+          lastName={array.lastName}
+          phoneNumber={array.phoneNumber} 
+          />
+       )} 
+    </div>
+  );
+}
+
+
+class Button extends React.Component {
+  state = {
+    color: "orange"
+  };
+
+changeBtn = () => {
+  this.setState(prevState => ({
+    color: "green"
+  }));
+
+}
+
+  render() {
+    const { 
+      variant,
+      content,
+      ...others
+    } = this.props;
+    
+    return (
+      <div>
+      <button className={this.state.color} {...others}
+        onClick = {this.changeBtn}>
+        {content}
+      </button>
+        </div>
+    )
+  }
+}
+
+ReactDOM.render(
+  <Contact contactList={array} />,
+ 
+  document.getElementById('app')
+);
+
+
+
+
+
+
+
+
